@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KNOUX Player X™ - Loading</title>
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      width: 500px;
+      height: 350px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0a0e1a 0%, #141b2d 100%);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      overflow: hidden;
+    }
+    
+    .splash-container {
+      text-align: center;
+      padding: 40px;
+    }
+    
+    .logo {
+      margin-bottom: 30px;
+    }
+    
+    .logo-text {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #00f0ff, #ff00f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
+    .logo-subtitle {
+      display: block;
+      font-size: 0.875rem;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.5em;
+      margin-top: 8px;
+    }
+    
+    @keyframes glow {
+      from {
+        filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5));
+      }
+      to {
+        filter: drop-shadow(0 0 20px rgba(0, 240, 255, 0.8));
+      }
+    }
+    
+    .loading-bar {
+      width: 200px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      margin: 0 auto 20px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .loading-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #00f0ff, #ff00f0);
+      border-radius: 2px;
+      animation: loading 2s ease-in-out infinite;
+      box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    }
+    
+    @keyframes loading {
+      0% {
+        width: 0%;
+        left: 0;
+      }
+      50% {
+        width: 100%;
+        left: 0;
+      }
+      100% {
+        width: 0%;
+        left: 100%;
+      }
+    }
+    
+    .loading-text {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.75rem;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.5;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    
+    .version {
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      font-size: 0.625rem;
+      color: rgba(255, 255, 255, 0.3);
+    }
+    
+    /* Corner decorations */
+    .corner {
+      position: absolute;
+      width: 30px;
+      height: 30px;
+      border: 1px solid rgba(0, 240, 255, 0.3);
+    }
+    
+    .corner-tl {
+      top: 20px;
+      left: 20px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    .corner-tr {
+      top: 20px;
+      right: 20px;
+      border-left: none;
+      border-bottom: none;
+    }
+    
+    .corner-bl {
+      bottom: 20px;
+      left: 20px;
+      border-right: none;
+      border-top: none;
+    }
+    
+    .corner-br {
+      bottom: 20px;
+      right: 20px;
+      border-left: none;
+      border-top: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+  
+  <div class="splash-container">
+    <div class="logo">
+      <span class="logo-text">KNOUX</span>
+      <span class="logo-subtitle">Player X™</span>
+    </div>
+    
+    <div class="loading-bar">
+      <div class="loading-progress"></div>
+    </div>
+    
+    <p class="loading-text">Initializing...</p>
+  </div>
+  
+  <span class="version">v1.0.0</span>
+</body>
+</html>
