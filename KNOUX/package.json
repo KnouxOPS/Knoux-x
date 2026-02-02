@@ -1,7 +1,7 @@
 {
   "name": "knoux-player-x",
-  "version": "1.0.0",
-  "description": "KNOUX Player X™ - Next-Gen Media Player with AI Integration",
+  "version": "2.0.0",
+  "description": "KNOUX Player X™ Ultimate - Next-Gen Media Player with OpenRouter AI Integration",
   "main": "dist/electron/main.js",
   "author": "SADEK ELGAZAR (KNOUX)",
   "license": "Proprietary",
@@ -68,7 +68,6 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.2.0",
     "@tensorflow/tfjs": "^4.15.0",
     "@tensorflow/tfjs-node": "^4.15.0",
     "better-sqlite3": "^9.4.0",

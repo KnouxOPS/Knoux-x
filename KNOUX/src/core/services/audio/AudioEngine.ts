@@ -10,36 +10,8 @@
  * @version 1.0.0
  */
 
+import EventEmitter from 'events';
 import { DSPSystemManager } from '../../dsp/DSPSystemManager';
-
-// Simple EventEmitter polyfill for browser/renderer
-class EventEmitter {
-  private events: { [key: string]: Function[] } = {};
-
-  public on(event: string, listener: Function): this {
-    if (!this.events[event]) {
-      this.events[event] = [];
-    }
-    this.events[event].push(listener);
-    return this;
-  }
-
-  public off(event: string, listener: Function): this {
-    if (!this.events[event]) return this;
-    this.events[event] = this.events[event].filter(l => l !== listener);
-    return this;
-  }
-
-  public emit(event: string, ...args: any[]): boolean {
-    if (!this.events[event]) return false;
-    this.events[event].forEach(listener => listener(...args));
-    return true;
-  }
-
-  public removeListener(event: string, listener: Function): this {
-      return this.off(event, listener);
-  }
-}
 
 // ═══════════════════════════════════════════════════════════════════════════
 // أنواع البيانات
@@ -353,10 +325,8 @@ export class AudioEngine extends EventEmitter {
 
   public async setAudioDevice(deviceId: string): Promise<void> {
     if (this.mediaElement) {
-      // @ts-ignore - setSinkId is not in standard types yet
-      if (typeof this.mediaElement.setSinkId === 'function') {
-        // @ts-ignore
-        await this.mediaElement.setSinkId(deviceId);
+      if (typeof (this.mediaElement as any).setSinkId === 'function') {
+        await (this.mediaElement as any).setSinkId(deviceId);
         this.emit('device-change', deviceId);
       }
     }

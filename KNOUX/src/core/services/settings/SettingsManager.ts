@@ -10,34 +10,7 @@
  * @version 1.0.0
  */
 
-// Simple EventEmitter polyfill for browser/renderer
-class EventEmitter {
-  private events: { [key: string]: Function[] } = {};
-
-  public on(event: string, listener: Function): this {
-    if (!this.events[event]) {
-      this.events[event] = [];
-    }
-    this.events[event].push(listener);
-    return this;
-  }
-
-  public off(event: string, listener: Function): this {
-    if (!this.events[event]) return this;
-    this.events[event] = this.events[event].filter(l => l !== listener);
-    return this;
-  }
-
-  public emit(event: string, ...args: any[]): boolean {
-    if (!this.events[event]) return false;
-    this.events[event].forEach(listener => listener(...args));
-    return true;
-  }
-
-  public removeListener(event: string, listener: Function): this {
-      return this.off(event, listener);
-  }
-}
+import EventEmitter from 'events';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // أنواع البيانات
@@ -184,7 +157,7 @@ export class SettingsManager extends EventEmitter {
 
   public async reset(key?: string): Promise<void> {
     if (key) {
-      const defaultValue = (defaultSettings as any)[key];
+      const defaultValue = (defaultSettings as unknown as Record<string, unknown>)[key];
       await this.set(key, defaultValue);
     } else {
       // Reset all settings
@@ -302,8 +275,7 @@ export class SettingsManager extends EventEmitter {
   // ═════════════════════════════════════════════════════════════════════════
 
   public onChange(callback: (key: string, value: unknown, oldValue: unknown) => void): () => void {
-    const handler = (key: string, value: unknown, oldValue: unknown) => callback(key, value, oldValue);
-    this.on('change', handler);
-    return () => this.off('change', handler);
+    this.on('change', callback);
+    return () => this.off('change', callback);
   }
 }

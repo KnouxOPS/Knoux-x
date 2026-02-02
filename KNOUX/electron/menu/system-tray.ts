@@ -13,9 +13,6 @@
 import { Tray, Menu, app, nativeImage, BrowserWindow } from 'electron';
 import path from 'path';
 
-declare var __dirname: string;
-declare var process: any;
-
 let tray: Tray | null = null;
 
 export function createSystemTray(): Tray {

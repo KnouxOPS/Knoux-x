@@ -21,11 +21,8 @@ import { setupIPCHandlers } from './ipc/setup';
 import { createApplicationMenu } from './menu/app-menu';
 import { createSystemTray } from './menu/system-tray';
 
-// Global declarations
-declare var __dirname: string;
-declare var process: any;
-declare var require: any;
-declare var MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
+declare const MAIN_WINDOW_VITE_DEV_SERVER_URL: string;
+declare const MAIN_WINDOW_VITE_NAME: string;
 
 // Configure logging
 log.transports.file.level = 'info';
@@ -151,7 +148,7 @@ const createMainWindow = async (): Promise<BrowserWindow> => {
   });
 
   // Load the app
-  if (typeof MAIN_WINDOW_VITE_DEV_SERVER_URL !== 'undefined') {
+  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     await mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
     mainWindow.webContents.openDevTools();
   } else {

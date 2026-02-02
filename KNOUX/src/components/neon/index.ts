@@ -1,20 +1,20 @@
 /**
  * ═══════════════════════════════════════════════════════════════════════
- * KNOUX Player X™ - Neon Components Index
+ * KNOUX Player X™ - Neon Components Export
  * ═══════════════════════════════════════════════════════════════════════
- * 
- * فهرس مكونات النيون
- * 
- * @module Components/Neon
- * @author KNOUX Development Team
- * @version 1.0.0
  */
 
 export { NeonButton } from './NeonButton';
-export type { NeonButtonProps } from './NeonButton';
-
 export { NeonPanel } from './NeonPanel';
-export type { NeonPanelProps } from './NeonPanel';
-
 export { NeonSlider } from './NeonSlider';
-export type { NeonSliderProps } from './NeonSlider';
+export { NeonCard } from './NeonCard';
+export { NeonText } from './NeonText';
+export { NeonInput } from './NeonInput';
+export { NeonProgress } from './NeonProgress';
+export { NeonBadge } from './NeonBadge';
+
+export type { NeonCardProps } from './NeonCard';
+export type { NeonTextProps } from './NeonText';
+export type { NeonInputProps } from './NeonInput';
+export type { NeonProgressProps } from './NeonProgress';
+export type { NeonBadgeProps } from './NeonBadge';

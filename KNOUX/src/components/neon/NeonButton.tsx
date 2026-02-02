@@ -171,7 +171,7 @@ export const NeonButton = forwardRef<HTMLButtonElement, NeonButtonProps>(
         }
         whileTap={isDisabled ? {} : { scale: 0.98 }}
         disabled={isDisabled}
-        {...(props as any)}
+        {...props}
       >
         {/* Glow overlay */}
         <motion.div

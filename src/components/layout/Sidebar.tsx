@@ -207,4 +207,39 @@ export const Sidebar: React.FC = () => {
             whileHover={{ x: 5 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="nav
+            <span className="nav-icon"><ListPlus size={18} /></span>
+            <span className="nav-label">Create Playlist</span>
+          </motion.button>
+          
+          <motion.button
+            className="nav-item"
+            onClick={() => setView('library')}
+            whileHover={{ x: 5 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <span className="nav-icon"><List size={18} /></span>
+            <span className="nav-label">Manage Playlists</span>
+          </motion.button>
+        </nav>
+      </div>
+
+      {/* AI Assistant */}
+      <div className="sidebar-section ai-section">
+        <NeonButton
+          variant="ghost"
+          size="md"
+          leftIcon={<MessageSquare size={18} />}
+          onClick={toggleAIAssistant}
+          fullWidth
+        >
+          AI Assistant
+        </NeonButton>
+      </div>
+
+      {/* App Info */}
+      <div className="sidebar-footer">
+        <span className="version">v1.0.0</span>
+      </div>
+    </motion.aside>
+  );
+};

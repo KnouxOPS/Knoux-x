@@ -13,8 +13,6 @@
 import crypto from 'crypto';
 import path from 'path';
 
-declare var Buffer: any;
-
 // ═══════════════════════════════════════════════════════════════════════════
 // أنواع البيانات
 // ═══════════════════════════════════════════════════════════════════════════
@@ -45,7 +43,7 @@ export interface EncryptedData {
 
 export class SecurityManager {
   private config: SecurityConfiguration;
-  private encryptionKey: any | null = null;
+  private encryptionKey: Buffer | null = null;
   private blockedPatterns: RegExp[];
   private allowedExtensions: Set<string>;
 

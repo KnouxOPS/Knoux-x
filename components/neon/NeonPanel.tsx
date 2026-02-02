@@ -6,6 +6,7 @@ export interface NeonPanelProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'dark' | 'glass';
   padding?: 'none' | 'sm' | 'md' | 'lg';
   borderGlow?: boolean;
+  glowIntensity?: string;
 }
 
 export const NeonPanel: React.FC<NeonPanelProps> = ({
@@ -13,6 +14,7 @@ export const NeonPanel: React.FC<NeonPanelProps> = ({
   variant = 'dark',
   padding = 'md',
   borderGlow = true,
+  glowIntensity,
   style,
   className = '',
   ...props

@@ -12,8 +12,6 @@
 
 import { contextBridge, ipcRenderer } from 'electron';
 
-declare var Buffer: any;
-
 // ═══════════════════════════════════════════════════════════════════════════
 // أنواع البيانات
 // ═══════════════════════════════════════════════════════════════════════════
@@ -83,10 +81,10 @@ const fileAPI = {
   saveFile: (options?: DialogOptions): Promise<string | null> =>
     ipcRenderer.invoke('file:save', options),
 
-  readFile: (filePath: string): Promise<any> =>
+  readFile: (filePath: string): Promise<Buffer> =>
     ipcRenderer.invoke('file:read', filePath),
 
-  writeFile: (filePath: string, data: any | string): Promise<void> =>
+  writeFile: (filePath: string, data: Buffer | string): Promise<void> =>
     ipcRenderer.invoke('file:write', filePath, data),
 
   deleteFile: (filePath: string): Promise<boolean> =>

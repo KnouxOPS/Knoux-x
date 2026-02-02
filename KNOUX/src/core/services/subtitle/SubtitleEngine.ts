@@ -10,34 +10,7 @@
  * @version 1.0.0
  */
 
-// Simple EventEmitter polyfill for browser/renderer
-class EventEmitter {
-  private events: { [key: string]: Function[] } = {};
-
-  public on(event: string, listener: Function): this {
-    if (!this.events[event]) {
-      this.events[event] = [];
-    }
-    this.events[event].push(listener);
-    return this;
-  }
-
-  public off(event: string, listener: Function): this {
-    if (!this.events[event]) return this;
-    this.events[event] = this.events[event].filter(l => l !== listener);
-    return this;
-  }
-
-  public emit(event: string, ...args: any[]): boolean {
-    if (!this.events[event]) return false;
-    this.events[event].forEach(listener => listener(...args));
-    return true;
-  }
-
-  public removeListener(event: string, listener: Function): this {
-      return this.off(event, listener);
-  }
-}
+import EventEmitter from 'events';
 
 // ═══════════════════════════════════════════════════════════════════════════
 // أنواع البيانات
@@ -391,4 +364,128 @@ export class SubtitleEngine extends EventEmitter {
       color: ${fontColor};
       background-color: ${backgroundColor};
       font-family: ${fontFamily};
-      text-align
+      text-align: center;
+      padding: 8px 16px;
+      border-radius: 4px;
+      max-width: 80%;
+      white-space: pre-wrap;
+      pointer-events: none;
+      font-weight: ${bold ? 'bold' : 'normal'};
+      font-style: ${italic ? 'italic' : 'normal'};
+    `;
+
+    if (outline) {
+      styles += `
+        text-shadow: 
+          -1px -1px 0 ${outlineColor},
+          1px -1px 0 ${outlineColor},
+          -1px 1px 0 ${outlineColor},
+          1px 1px 0 ${outlineColor};
+      `;
+    }
+
+    return styles;
+  }
+
+  public clearCues(): void {
+    this.cues = [];
+    this.currentCue = null;
+    this.updateSubtitleDisplay();
+  }
+
+  // ═════════════════════════════════════════════════════════════════════════
+  // الإعدادات
+  // ═════════════════════════════════════════════════════════════════════════
+
+  public async setEnabled(enabled: boolean): Promise<void> {
+    this.settings.enabled = enabled;
+    this.updateSubtitleDisplay();
+    this.emit('enabled-change', enabled);
+  }
+
+  public async setDelay(delay: number): Promise<void> {
+    this.settings.delay = delay;
+    this.emit('delay-change', delay);
+  }
+
+  public async setStyle(style: Partial<SubtitleSettings>): Promise<void> {
+    this.settings = { ...this.settings, ...style };
+    this.updateSubtitleDisplay();
+    this.emit('style-change', this.settings);
+  }
+
+  public getSettings(): SubtitleSettings {
+    return { ...this.settings };
+  }
+
+  // ═════════════════════════════════════════════════════════════════════════
+  // البحث والتنزيل
+  // ═════════════════════════════════════════════════════════════════════════
+
+  public async searchSubtitles(query: string, language?: string): Promise<SearchResult[]> {
+    // This would integrate with subtitle APIs like OpenSubtitles
+    console.log('Searching subtitles:', query, language);
+    return [];
+  }
+
+  public async downloadSubtitle(subtitleId: string): Promise<string> {
+    // Download subtitle from API
+    console.log('Downloading subtitle:', subtitleId);
+    return '';
+  }
+
+  // ═════════════════════════════════════════════════════════════════════════
+  // الذكاء الاصطناعي
+  // ═════════════════════════════════════════════════════════════════════════
+
+  public async syncWithAI(): Promise<void> {
+    // Use AI to sync subtitles with audio
+    console.log('Syncing subtitles with AI...');
+    this.emit('sync-start');
+    
+    // AI sync logic would go here
+    
+    this.emit('sync-complete');
+  }
+
+  public async translateWithAI(targetLanguage: string): Promise<void> {
+    // Use AI to translate subtitles
+    console.log('Translating subtitles to:', targetLanguage);
+    this.emit('translate-start');
+
+    if (this.cues.length > 0) {
+      // Translate each cue
+      for (const cue of this.cues) {
+        // AI translation would go here
+        // cue.text = await translate(cue.text, targetLanguage);
+      }
+    }
+
+    this.emit('translate-complete');
+  }
+
+  // ═════════════════════════════════════════════════════════════════════════
+  // المسارات
+  // ═════════════════════════════════════════════════════════════════════════
+
+  public getTracks(): SubtitleTrack[] {
+    return [...this.tracks];
+  }
+
+  public addTrack(track: SubtitleTrack): void {
+    this.tracks.push(track);
+    this.emit('track-add', track);
+  }
+
+  public removeTrack(trackId: string): void {
+    this.tracks = this.tracks.filter((t) => t.id !== trackId);
+    this.emit('track-remove', trackId);
+  }
+
+  public setTrack(trackId: string): void {
+    this.tracks.forEach((t) => {
+      t.enabled = t.id === trackId;
+    });
+    this.emit('track-change', trackId);
+  }
+}

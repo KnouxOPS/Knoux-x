@@ -12,8 +12,6 @@
 
 import { Menu, MenuItemConstructorOptions, app, shell, dialog } from 'electron';
 
-declare var process: any;
-
 export function createApplicationMenu(): void {
   const template: MenuItemConstructorOptions[] = [
     // ═══════════════════════════════════════════════════════════════════════

@@ -1,0 +1,83 @@
+/* Neon Components Styles */
+
+.neon-card {
+  position: relative;
+  background: linear-gradient(135deg, rgba(15, 21, 37, 0.9), rgba(20, 27, 45, 0.9));
+  border-radius: 16px;
+  padding: 1px;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.neon-card-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--glow-color), transparent, var(--glow-color));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.neon-card-content {
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(135deg, rgba(15, 21, 37, 0.95), rgba(20, 27, 45, 0.95));
+  border-radius: 15px;
+  padding: 20px;
+  height: 100%;
+}
+
+.neon-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 20px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.neon-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.neon-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 0 12px;
+  transition: all 0.2s ease;
+}
+
+.neon-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 0.875rem;
+  padding: 12px 0;
+  outline: none;
+}
+
+.neon-input-border {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  transform-origin: left;
+  border-radius: 0 0 10px 10px;
+}

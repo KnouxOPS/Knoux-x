@@ -10,14 +10,10 @@
  * @version 1.0.0
  */
 
-import { ipcMain, dialog, shell } from 'electron';
+import { ipcMain, dialog, shell, IpcMainInvokeEvent } from 'electron';
 import fs from 'fs/promises';
 import path from 'path';
 import type { SystemOrchestrator } from '../../src/core/orchestrator/SystemOrchestrator';
-
-// Declarations for missing types in this context
-declare var Buffer: any;
-declare var process: any;
 
 // ═══════════════════════════════════════════════════════════════════════════
 // معالجات الملفات
@@ -77,7 +73,7 @@ function setupFileHandlers(ipc: typeof ipcMain, orchestrator: SystemOrchestrator
     return fs.readFile(filePath);
   });
 
-  ipc.handle('file:write', async (_, filePath: string, data: any) => {
+  ipc.handle('file:write', async (_, filePath: string, data: Buffer | string) => {
     await fs.writeFile(filePath, data);
   });
 
